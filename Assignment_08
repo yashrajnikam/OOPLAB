@@ -1,0 +1,69 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+// Base class
+class Person 
+{
+protected:
+    string name;
+    int age;
+    string contact;
+
+public:
+    Person(const string& n, int a, const string& c) 
+        : name(n), age(a), contact(c) {}
+
+    void displayPerson() const 
+    {
+        cout << "Name: " << name << endl;
+        cout << "Age: " << age << endl;
+        cout << "Contact: " << contact << endl;
+    }
+};
+
+// Derived class (Single Inheritance from Person)
+class Employee : public Person 
+{
+protected:
+    int employeeID;
+    string department;
+
+public:
+    Employee(const string& n, int a, const string& c, int id, const string& dept)
+        : Person(n, a, c), employeeID(id), department(dept) {}
+
+    void displayEmployee() const 
+    {
+        displayPerson();
+        cout << "Employee ID: " << employeeID << endl;
+        cout << "Department: " << department << endl;
+    }
+};
+
+// Derived class (Multilevel Inheritance from Employee)
+class Manager : public Employee 
+{
+private:
+    int teamSize;
+
+public:
+    Manager(const string& n, int a, const string& c, int id, const string& dept, int size)
+        : Employee(n, a, c, id, dept), teamSize(size) {}
+
+    void displayManager() const 
+    {
+        displayEmployee();
+        cout << "Team Size: " << teamSize << endl;
+    }
+};
+
+int main() 
+{
+    Manager manager("YASHRAJ", 18, "8329151125", 65, "HR", 999);
+
+    cout << "--- Manager Details ---" << endl;
+    manager.displayManager();
+
+    return 0;
+}
